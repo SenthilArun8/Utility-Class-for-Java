@@ -1,0 +1,237 @@
+package functionality;
+
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.io.*;
+
+public class CommonFunctions {
+
+  public static String validate(String toPrint, String limit1) {
+    Scanner reader = new Scanner(System.in);
+    String checked;
+
+    do {
+      System.out.println(toPrint);
+      checked = reader.nextLine();
+    } while (!checked.equalsIgnoreCase(limit1));
+    reader.close();
+    return checked;
+  }
+
+  // method repeats instructors if conditions aren't meant -- 2 conditions
+  public static String validate(String toPrint, String limit1, String limit2) {
+    Scanner reader = new Scanner(System.in);
+    String checked;
+
+    do {
+      System.out.println(toPrint);
+      checked = reader.nextLine();
+    } while (!checked.equalsIgnoreCase(limit1) && !checked.equalsIgnoreCase(limit2));
+    reader.close();
+    return checked;
+  }
+
+  // method to confirm changes with the user
+  public static String confirm(String toPrint) {
+    Scanner reader = new Scanner(System.in);
+    String checked;
+
+    do {
+      System.out.println(toPrint);
+      checked = reader.nextLine();
+    } while (!checked.equalsIgnoreCase("y") && !checked.equalsIgnoreCase("n"));
+    reader.close();
+    return checked;
+  }
+
+  // method repeats instructors if conditions aren't meant -- 3 conditions
+  public static String validate(String toPrint, String limit1, String limit2, String limit3) {
+    Scanner reader = new Scanner(System.in);
+    String checked;
+    do {
+      System.out.println(toPrint);
+      checked = reader.nextLine();
+    } while (!checked.equalsIgnoreCase(limit1) && !checked.equalsIgnoreCase(limit2)
+        && !checked.equalsIgnoreCase(limit3));
+    reader.close();
+    return checked;
+  }
+
+  // method repeats instructors if conditions aren't meant -- 4 conditions
+  public static String validate(String toPrint, String limit1, String limit2, String limit3, String limit4) {
+    Scanner reader = new Scanner(System.in);
+    String checked;
+    do {
+      System.out.println(toPrint);
+      checked = reader.nextLine();
+    } while (!checked.equalsIgnoreCase(limit1) && !checked.equalsIgnoreCase(limit2) && !checked.equalsIgnoreCase(limit3)
+        && !checked.equalsIgnoreCase(limit4));
+    reader.close();
+    return checked;
+  }
+
+  // method repeats instructors if conditions aren't meant -- 6 conditions
+  public static String validate(String toPrint, String limit1, String limit2, String limit3, String limit4, String limit5, String limit6) {
+    Scanner reader = new Scanner(System.in);
+    String checked;
+    do {
+      System.out.println(toPrint);
+      checked = reader.nextLine();
+    } while (!checked.equalsIgnoreCase(limit1) && !checked.equalsIgnoreCase(limit2) && !checked.equalsIgnoreCase(limit3) && !checked.equalsIgnoreCase(limit4) && !checked.equalsIgnoreCase(limit5) && !checked.equalsIgnoreCase(limit6));
+    reader.close();
+    return checked;
+  }
+
+  // method repeats instructors if interger is out of range -- 2 conditions
+  public static int checkNumRange(String toPrint, int limit1, int limit2) {
+    Scanner reader = new Scanner(System.in);
+    int checked = -1;
+    boolean loop = false;
+    do {
+      try {
+        System.out.println(toPrint);
+        checked = Integer.parseInt(reader.next());
+        if (checked < limit1 || checked > limit2) {
+          System.out.println("Please enter a within the range");
+        }
+      } catch (NumberFormatException e) {
+        loop = true;
+        System.out.println("Please enter an integer");
+      }
+    } while (checked < limit1 || checked > limit2 || loop);
+    reader.close();
+    return checked;
+  }
+
+  // method reads and print out file on the console
+  public static void readAndPrintFile(String filename, String message) {
+    String stage = "";
+    try {
+      stage = "writing";
+      FileReader fr = new FileReader(filename);
+      BufferedReader br = new BufferedReader(fr);
+      String line;
+      stage = "first reading line";
+      line = br.readLine();
+      while (line != null) {
+        stage = "reading in inner loop";
+        System.out.println("\t" + line);
+        line = br.readLine();
+      }
+      br.close();
+    } catch (IOException e) {
+      System.out.println(message + " @ "+ stage);
+    }
+  }
+
+  // method write to a file from an array
+  public static void writeFile(String filename, boolean append, String[] information, String message) {
+    try {
+      FileWriter fr = new FileWriter(filename, append);
+      PrintWriter pw = new PrintWriter(fr);
+      for (String i : information) {
+        pw.println(i);
+      }
+      pw.close();
+    } catch (IOException e) {
+      System.out.println(message);
+    }
+  }
+
+  // writes to file with a String array
+  public static void writeFileSameLine(String filename, boolean append, String[] information, String message) {
+    try {
+      FileWriter fr = new FileWriter(filename, append);
+      PrintWriter pw = new PrintWriter(fr);
+      pw.println();
+      for (String i : information){
+        pw.print(i);
+      }
+      pw.close();
+    } catch (IOException e) {
+      System.out.println(message);
+    }
+  }
+    
+    // write to file
+    public static void writeFile(String filename, boolean append, String information, String message) {
+    try {
+      FileWriter fr = new FileWriter(filename, append);
+      PrintWriter pw = new PrintWriter(fr);
+      pw.println(information);
+      pw.close();
+    } catch (IOException e) {
+      System.out.println(message);
+    }
+  }
+
+  // method write to a file from an arraylist
+  public static void writeFile(String filename, boolean append, ArrayList<String> information, String message) {
+    try {
+      FileWriter fr = new FileWriter(filename, append);
+      PrintWriter pw = new PrintWriter(fr);
+      for (String i : information) {
+        pw.println(i);
+      }
+      pw.close();
+    } catch (IOException e) {
+      System.out.println(message);
+    }
+  }
+
+  // prints out String array on the console
+  public static void viewArray(String[] information){
+    for (String i : information){
+      System.out.println(i);
+    }
+  }
+
+  // prints out int array on the console
+  public static void viewArray(int[] information){
+    for (int i : information){
+      System.out.println(i);
+    }
+  }
+
+  // method flushes the console
+  public static void clearConsole() {
+    System.out.print("\033[H\033[2J");
+    System.out.flush();
+  }
+
+  // pauses the program
+  public static void sleep(int amount) {
+    try {
+      Thread.sleep(amount);
+    } catch (InterruptedException e) {
+      System.out.println("Error while waiting");
+    }
+  }
+  
+  // pauses the program
+  public static void sleep(int amount, String message) {
+    System.out.println(message);
+    try {
+      Thread.sleep(amount);
+    } catch (InterruptedException e) {
+      System.out.println("Error while waiting");
+    }
+  }
+
+  // capitalizes the word
+  public static String capitalize(String word) {
+    return word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase();
+  }
+
+  public static String capitalizeAll(String sentence, String separator) {
+    String[] seperatedWords = sentence.split(separator);
+    String finalWord = "";
+    
+    for (String word : seperatedWords){
+      finalWord += word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase() + " ";
+    }
+    
+    return finalWord;
+  }
+
+}
